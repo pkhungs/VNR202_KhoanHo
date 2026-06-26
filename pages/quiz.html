@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câu hỏi - Khoán hộ Vĩnh Phúc</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="quiz-shell">
+    <section class="quiz-layout" aria-labelledby="quiz-title">
+      <aside class="quiz-side">
+        <p class="eyebrow">Ôn tập kiến thức</p>
+        <h1 id="quiz-title">Câu hỏi về Khoán hộ</h1>
+        <p>
+          Mỗi lượt làm bài sẽ xáo trộn thứ tự câu hỏi và đáp án. Chọn đáp án đúng để kiểm tra mức độ hiểu bài.
+        </p>
+        <div class="quiz-status">
+          <span id="quiz-count">Câu 1 / 20</span>
+          <span id="quiz-score">Đúng: 0</span>
+        </div>
+      </aside>
+
+      <section class="quiz-card" aria-live="polite">
+        <div class="quiz-progress" aria-hidden="true">
+          <span id="quiz-progress"></span>
+        </div>
+        <p id="quiz-section" class="quiz-section"></p>
+        <h2 id="quiz-question"></h2>
+        <div id="quiz-options" class="quiz-options"></div>
+        <p id="quiz-feedback" class="quiz-feedback"></p>
+        <div class="quiz-actions">
+          <button id="next-question" class="quiz-button primary" type="button" disabled>Câu tiếp theo</button>
+          <button id="restart-quiz" class="quiz-button secondary" type="button">Làm lại</button>
+        </div>
+      </section>
+
+      <section id="quiz-result" class="quiz-result" hidden>
+        <p class="eyebrow">Kết quả</p>
+        <h2 id="result-title"></h2>
+        <p id="result-text"></p>
+        <button id="result-restart" class="quiz-button primary" type="button">Làm bài mới</button>
+      </section>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="../js/app.js"></script>
+  <script src="../js/quiz.js"></script>
+</body>
+</html>

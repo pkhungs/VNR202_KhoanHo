@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Game - Một quyết định ở Vĩnh Phúc</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/game.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="game-shell">
+    <section class="game-board" aria-labelledby="game-title">
+      <div class="game-topline">
+        <p class="eyebrow">Mini Game nhập vai</p>
+        <p id="round-label" class="round-label">Màn 1 / 15</p>
+      </div>
+
+      <h1 id="game-title">Một quyết định ở Vĩnh Phúc</h1>
+      <p class="game-lead">
+        Bạn vào vai một cán bộ lãnh đạo địa phương ở Vĩnh Phúc. Mỗi quyết định đều phải cân bằng
+        hiệu quả sản xuất, đời sống nông dân, đồng thuận cấp trên và rủi ro chính sách.
+      </p>
+
+      <section class="stats-panel" aria-label="Bốn chỉ số cần cân bằng">
+        <article class="stat-card" data-stat="production">
+          <div class="stat-heading">
+            <span>Sản lượng</span>
+            <strong id="stat-production">5/10</strong>
+          </div>
+          <div class="meter"><span id="meter-production"></span></div>
+        </article>
+        <article class="stat-card" data-stat="farmerLife">
+          <div class="stat-heading">
+            <span>Đời sống nông dân</span>
+            <strong id="stat-farmerLife">5/10</strong>
+          </div>
+          <div class="meter"><span id="meter-farmerLife"></span></div>
+        </article>
+        <article class="stat-card" data-stat="approval">
+          <div class="stat-heading">
+            <span>Đồng thuận cấp trên</span>
+            <strong id="stat-approval">5/10</strong>
+          </div>
+          <div class="meter"><span id="meter-approval"></span></div>
+        </article>
+        <article class="stat-card risk" data-stat="risk">
+          <div class="stat-heading">
+            <span>Rủi ro chính sách</span>
+            <strong id="stat-risk">3/10</strong>
+          </div>
+          <div class="meter"><span id="meter-risk"></span></div>
+        </article>
+      </section>
+
+      <section class="decision-stage" aria-live="polite">
+        <article id="decision-card" class="decision-card">
+          <p id="scene-number" class="scene-kicker">Màn 1</p>
+          <h2 id="scene-title"></h2>
+          <p id="scene-text"></p>
+        </article>
+
+        <div class="choice-zone">
+          <div id="choice-list" class="choice-list" aria-label="Các lựa chọn"></div>
+          <p id="feedback" class="feedback"></p>
+        </div>
+      </section>
+    </section>
+
+    <section id="ending-panel" class="ending-panel" hidden>
+      <p class="eyebrow">Kết thúc</p>
+      <h2 id="ending-title"></h2>
+      <p id="ending-text"></p>
+      <p id="ending-message" class="ending-message"></p>
+      <div class="ending-actions">
+        <button id="restart-button" class="game-button primary" type="button">Chơi lại</button>
+        <a class="game-button secondary" href="fromContractingtoContract10.html">Xem hành trình lịch sử</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="../js/app.js"></script>
+  <script src="../js/game.js"></script>
+</body>
+</html>
