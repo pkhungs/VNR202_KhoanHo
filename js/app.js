@@ -11,6 +11,7 @@ function fallbackPartial(targetId) {
         </button>
         <nav class="site-nav" aria-label="Điều hướng chính">
           <a href="index.html" data-page="index.html">Trang chủ</a>
+          <a href="timeline.html" data-page="timeline.html">Time Line</a>
           <a href="KimNgoc.html" data-page="KimNgoc.html">Kim Ngọc</a>
           <a href="historicalContext.html" data-page="historicalContext.html">Bối cảnh lịch sử</a>
           <a href="householdContracting.html" data-page="householdContracting.html">Khoán hộ Vĩnh Phúc</a>
@@ -84,6 +85,43 @@ function initNavigation() {
   });
 }
 
+function initTimeline() {
+  const cards = document.querySelectorAll(".tl-card[tabindex]");
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const isOpen = card.classList.toggle("is-open");
+      card.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const isOpen = card.classList.toggle("is-open");
+        card.setAttribute("aria-expanded", String(isOpen));
+      }
+    });
+  });
+}
+
+function initScrollAnimation() {
+  const events = document.querySelectorAll(".tl-event");
+  if (!events.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  events.forEach((el) => observer.observe(el));
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   await Promise.all([
     loadPartial("header-placeholder", "../common/header.html"),
@@ -91,4 +129,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   ]);
 
   initNavigation();
+  initTimeline();
+  initScrollAnimation();
 });
