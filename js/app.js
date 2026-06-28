@@ -165,6 +165,70 @@ function initScrollAnimation() {
   events.forEach((el) => observer.observe(el));
 }
 
+function initPersonTimeline() {
+  const timeline = document.querySelector("[data-person-timeline]");
+  if (!timeline) return;
+  const tabs = [...timeline.querySelectorAll('[role="tab"]')];
+  const panel = timeline.querySelector('[role="tabpanel"]');
+  const year = panel.querySelector("[data-timeline-year]");
+  const title = panel.querySelector("[data-timeline-title]");
+  const text = panel.querySelector("[data-timeline-text]");
+  let timer;
+
+  function select(tab) {
+    tabs.forEach((item) => {
+      const active = item === tab;
+      item.classList.toggle("is-active", active);
+      item.setAttribute("aria-selected", String(active));
+      item.tabIndex = active ? 0 : -1;
+    });
+    panel.classList.add("is-changing");
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      year.textContent = tab.dataset.year;
+      title.textContent = tab.dataset.title;
+      text.textContent = tab.dataset.text;
+      panel.classList.remove("is-changing");
+    }, 120);
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => select(tab));
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+      event.preventDefault();
+      const step = event.key === "ArrowRight" ? 1 : -1;
+      const next = tabs[(index + step + tabs.length) % tabs.length];
+      select(next);
+      next.focus();
+    });
+  });
+}
+
+function initResourceFilter() {
+  const buttons = [...document.querySelectorAll("[data-resource-filter]")];
+  const resources = [...document.querySelectorAll("[data-resource-type]")];
+  const groups = [...document.querySelectorAll("[data-resource-group]")];
+  if (!buttons.length) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.resourceFilter;
+      buttons.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      resources.forEach((item) => {
+        item.hidden = filter !== "all" && item.dataset.resourceType !== filter;
+      });
+      groups.forEach((group) => {
+        group.hidden = !group.querySelector("[data-resource-type]:not([hidden])");
+      });
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const baseDir = isAtRoot() ? "." : "..";
   await Promise.all([
@@ -175,4 +239,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   initNavigation();
   initTimeline();
   initScrollAnimation();
+  initPersonTimeline();
+  initResourceFilter();
 });
